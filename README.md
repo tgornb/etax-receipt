@@ -1,26 +1,48 @@
-# etax_receipt
 
-This project is a Django-based e-tax invoice generation software with AdminLTE admin portal.
+# Brainergy E-Tax Receipt System
+
+This project is an **e-tax invoice and e-receipt generation system** developed by Brainergy, based on the Django framework. It is designed to comply with the ETDA (Electronic Transactions Development Agency) standards in Thailand for creating, managing, and exporting e-tax invoices and e-receipt documents.
 
 ## Features
-- Convert raw data from CSV and REST API to PDF (using fpdf) and XML
-- Send generated PDF/XML to RestPDF microservice for PDF/A-3 conversion
-- Store all tax invoice transactions in PostgreSQL
-- Authenticated users can search, view, and download PDF/A-3 and XML documents from the admin portal
-- Users can manually create e-tax invoice, e-receipt, CN, DN from the admin portal
-- Generate sales tax report in .xlsx format
 
-## Frontend
-- AdminLTE-based admin portal with email/password authentication
-- Document creation, search, view, download, and sales tax report download
+- **Django-based web application** for secure and scalable document management
+- **AdminLTE integration** for a modern, user-friendly admin portal
+- **ETDA-compliant** e-tax invoice and e-receipt document structure
+- **PDF and XML generation** for all document types
+- **REST API** for integration with external systems
+- **CSV import** for bulk document creation
+- **Sales tax report export** (Excel)
+- **Dashboard** with analytics and document statistics
+- **PostgreSQL** (production) and **SQLite** (development) database support
+- **Custom authentication** for admin access
 
-## Setup
-1. Create and activate a Python virtual environment
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run migrations: `python manage.py migrate`
-4. Create a superuser: `python manage.py createsuperuser`
-5. Start the server: `python manage.py runserver`
+## Document Types Supported
+- Tax Invoice
+- Receipt
+- Credit Note
+- Debit Note
 
-## Notes
-- PostgreSQL is required for production use.
-- AdminLTE integration and additional features will be added in subsequent steps.
+## Technology Stack
+- Python 3.x
+- Django 4.x
+- django-adminlte3
+- djangorestframework
+- fpdf (PDF generation)
+- XlsxWriter (Excel export)
+- Chart.js (dashboard visualization)
+- PostgreSQL / SQLite
+
+## Compliance
+This software follows the ETDA e-Tax Invoice and e-Receipt standards for Thailand, ensuring all generated documents meet regulatory requirements.
+
+## Getting Started
+1. Clone the repository
+2. Install dependencies (see `requirements.txt`)
+3. Configure your database in `etax_receipt/settings.py`
+4. Run migrations: `python manage.py migrate`
+5. Create a superuser: `python manage.py createsuperuser`
+6. Start the server: `python manage.py runserver`
+7. Access the admin portal at `http://localhost:8000/admin/`
+
+## License
+This project is licensed under the GNU Affero General Public License (AGPL). See the LICENSE file for details.
