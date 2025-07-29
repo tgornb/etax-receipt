@@ -1,7 +1,7 @@
 
 # Brainergy E-Tax Receipt System
 
-This project is an **e-tax invoice and e-receipt generation system** developed by Brainergy, based on the Django framework. It is designed to comply with the ETDA (Electronic Transactions Development Agency) standards in Thailand for creating, managing, and exporting e-tax invoices and e-receipt documents.
+This project is an **e-tax invoice and e-receipt generation system** developed by Brainergy, based on the Django framework. This software is the core version of SmartTAX product. It is designed to comply with the ETDA (Electronic Transactions Development Agency) standards in Thailand for creating, managing, and exporting e-tax invoices and e-receipt documents.
 
 ## Features
 
