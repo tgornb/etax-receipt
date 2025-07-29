@@ -44,5 +44,4 @@ This software follows the ETDA e-Tax Invoice and e-Receipt standards for Thailan
 6. Start the server: `python manage.py runserver`
 7. Access the admin portal at `http://localhost:8000/admin/`
 
-## License
-This project is licensed under the GNU Affero General Public License (AGPL). See the LICENSE file for details.
+
