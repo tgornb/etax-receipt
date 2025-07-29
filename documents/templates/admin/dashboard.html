@@ -1,0 +1,131 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h1 class="display-4">E-Tax Dashboard</h1>
+    <div>
+      <a href="/admin/dashboard/" class="btn btn-outline-primary mx-1">Dashboard</a>
+      <a href="/admin/sales-tax-report/" class="btn btn-outline-success mx-1">Download Sales Tax Report</a>
+      <a href="/admin/documents/taxinvoice/import-csv/" class="btn btn-outline-info mx-1">Import TaxInvoice CSV</a>
+      <a href="/admin/documents/receipt/import-csv/" class="btn btn-outline-info mx-1">Import Receipt CSV</a>
+      <a href="/admin/documents/creditnote/import-csv/" class="btn btn-outline-info mx-1">Import CreditNote CSV</a>
+      <a href="/admin/documents/debitnote/import-csv/" class="btn btn-outline-info mx-1">Import DebitNote CSV</a>
+      <a href="/admin/" class="btn btn-outline-secondary mx-1">Admin Home</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Tax Invoices</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ taxinvoice_total }} total</h5>
+          <p class="card-text">{{ taxinvoice_success }} success</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Receipts</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ receipt_total }} total</h5>
+          <p class="card-text">{{ receipt_success }} success</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Credit Notes</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ creditnote_total }} total</h5>
+          <p class="card-text">{{ creditnote_success }} success</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Debit Notes</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ debitnote_total }} total</h5>
+          <p class="card-text">{{ debitnote_success }} success</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Documents by Month (Last 12 Months)</h5>
+        </div>
+        <div class="card-body">
+          <canvas id="docStackedBarChart" height="80"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{ months|json_script:"months-data" }}
+{{ taxinvoice_monthly|json_script:"taxinvoice-data" }}
+{{ receipt_monthly|json_script:"receipt-data" }}
+{{ creditnote_monthly|json_script:"creditnote-data" }}
+{{ debitnote_monthly|json_script:"debitnote-data" }}
+<script>
+  const monthsArr = JSON.parse(document.getElementById('months-data').textContent);
+  const taxinvoiceArr = JSON.parse(document.getElementById('taxinvoice-data').textContent);
+  const receiptArr = JSON.parse(document.getElementById('receipt-data').textContent);
+  const creditnoteArr = JSON.parse(document.getElementById('creditnote-data').textContent);
+  const debitnoteArr = JSON.parse(document.getElementById('debitnote-data').textContent);
+
+  const ctx = document.getElementById('docStackedBarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: monthsArr,
+      datasets: [
+        {
+          label: 'TaxInvoice',
+          data: taxinvoiceArr,
+          backgroundColor: 'rgba(0, 123, 255, 0.7)'
+        },
+        {
+          label: 'Receipt',
+          data: receiptArr,
+          backgroundColor: 'rgba(40, 167, 69, 0.7)'
+        },
+        {
+          label: 'CreditNote',
+          data: creditnoteArr,
+          backgroundColor: 'rgba(255, 193, 7, 0.7)'
+        },
+        {
+          label: 'DebitNote',
+          data: debitnoteArr,
+          backgroundColor: 'rgba(220, 53, 69, 0.7)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        title: { display: false }
+      },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, beginAtZero: true }
+      }
+    }
+  });
+
+  // Render the JSON data as script tags for Chart.js
+  // These will be placed at the end of the body
+</script>
+{% endblock %}
+

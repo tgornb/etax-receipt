@@ -1,0 +1,36 @@
+{% extends "adminlte3/base_site.html" %}
+{% load static %}
+
+{% block logo %}
+  <a href="{% url 'admin:index' %}" class="brand-link">
+    <span class="brand-text font-weight-bold" style="font-size: 1.3rem; letter-spacing: 1px;">BRAINERGY ETAX</span>
+  </a>
+{% endblock %}
+
+{% block nav_links %}
+  {{ block.super }}
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/documents/taxinvoice/import-csv/">
+      <i class="nav-icon fas fa-file-csv"></i>
+      <p>Import TaxInvoice CSV</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/documents/receipt/import-csv/">
+      <i class="nav-icon fas fa-file-csv"></i>
+      <p>Import Receipt CSV</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/documents/creditnote/import-csv/">
+      <i class="nav-icon fas fa-file-csv"></i>
+      <p>Import CreditNote CSV</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/documents/debitnote/import-csv/">
+      <i class="nav-icon fas fa-file-csv"></i>
+      <p>Import DebitNote CSV</p>
+    </a>
+  </li>
+{% endblock %}
